@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="jspsych.js"></script>
+    <script src="plugins/jspsych-survey-multi-choice.js"></script>
+    <link rel="stylesheet" href="css/jspsych.css">
+      <!-- jsPsychSheet library -->
+<script src="https://brain2ai.github.io/jsPsychSheet/jspsychsheet.js"></script>
+<link rel="stylesheet" href="https://brain2ai.github.io/jsPsychSheet/jspsychsheet.css">
+<title>RT eexperiment</title>
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    
+    </body>
+  <script>
+
+  // definiting two different response scales that can be used.
+  var page_1_options = ["Strongly something", "Disagree", "Neutral", "Agree", "Strongly Agree"];
+  var page_2_options = ["Strongly Disagree", "Disagree", "Somewhat Disagree", "Neural", "Somewhat Agree", "Agree", "Strongly Agree"];
+
+
+       var multi_choice_block = {
+    type: 'survey-multi-choice',
+    questions: [
+      {prompt: "Whelalappy", name: 'I1', options: page_1_options, required:true}, 
+    ],
+  };
+      
+  var multi_choice_block2 = {
+    type: 'survey-multi-choice',
+    questions: [
+      {prompt: "Is my girlfriend a genius?", name: 'I2', options: page_2_options, required: true}, 
+    ],
+  };
+        var multi_choice_block3 = {
+    type: 'survey-multi-choice',
+    questions: [
+      {prompt: "Is she getting flowers for this?", name: 'I3', options: page_1_options, required: true}, 
+    ],
+  };
+      
+       var multi_choice_block4 = {
+    type: 'survey-multi-choice',
+    questions: [
+      {prompt: "Do you like getting flowers?", name: 'I4', options: page_1_options, required: true}, 
+    ],
+  };
+
+
+  jsPsych.init({
+    timeline: [multi_choice_block, multi_choice_block2 ,multi_choice_block3, multi_choice_block4],
+  on_finish: function () {
+    url = "https://script.google.com/macros/s/AKfycbwpR7euylqd02BFplACxcEBx2fN6PVCQLnk2QETWVa9Ed4bfxWTvZKIkzocDarJORio/exec";
+    jsPsychSheet.uploadData(url, jsPsych.data.get().csv())
+  }
+});
+
+
+  </script>
+</html>
